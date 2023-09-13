@@ -1,4 +1,8 @@
 import '../style/main.css'
+import Feature from '../components/Feature'
+import ChatIcon from "../assets/icon-chat.png"
+import MoneyIcon from "../assets/icon-money.png"
+import ShieldIcon from "../assets/icon-security.png"
 
 function Home() {
     return (
@@ -14,21 +18,24 @@ function Home() {
             </div>
             <section className='features'>
                 <h2 className='sr-only'>Features</h2>
-                <div className='feature-item'>
-                    <img src='../assets/icon-chat.png' alt="Chat Icon" className='feature-icon' />
-                    <h3 className='feature-item-title'>You are our #1 priority</h3>
-                    <p>Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes.</p>
-                </div>
-                <div className='feature-item'>
-                    <img src='../assets/icon-money.png' alt='Money Icon' className='feature-icon' />
-                    <h3 className='feature-item-title'>More savings means higher rates</h3>
-                    <p>The more you save with us, the higher your interest rate will be!</p>
-                </div>
-                <div className='feature-item'>
-                    <img src='../assets/icon-security.png' alt='Shield Icon' className='feature-icon' />
-                    <h3 className='feature-item-title'>Security you can trust</h3>
-                    <p>We use top of the line encryption to make sure your data and money is always safe.</p>
-                </div>
+                <Feature
+                    icon= {ChatIcon}
+                    altIcon="Chat Icon"
+                    title= "You are our #1 priority"
+                    text= "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
+                />
+                <Feature
+                    icon= {MoneyIcon}
+                    altIcon="Money Icon"
+                    title= "More savings means higher rates"
+                    text= "The more you save with us, the higher your interest rate will be!"
+                />
+                <Feature
+                    icon= {ShieldIcon}
+                    altIcon="Shield Icon"
+                    title= "Security you can trust"
+                    text= "We use top of the line encryption to make sure your data and money is always safe."
+                />
             </section>
         </div>
     )
