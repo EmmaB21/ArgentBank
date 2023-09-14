@@ -1,10 +1,15 @@
 import "../style/main.css"
+import Form from "../components/Form"
 
 function Signin() {
     return (
-        <div className='page__ctn'>
-            Sign-in
-        </div>
+        <div className='main sign-bg-dark'>
+            <section className="sign-in-content">
+                <i className="fa fa-user-circle sign-in-icon"></i>
+                <h1>Sign In</h1>
+                <Form/>
+            </section>
+        </div>   
     )
 }
 

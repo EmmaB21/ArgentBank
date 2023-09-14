@@ -6,12 +6,12 @@ import User from './pages/User'
 import Signin from './pages/Signin'
 import Error from './pages/Error'
 
-const Routeur = () => {
+const App = () => {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />}/>
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/user" element={<User />} />
           <Route path="*" element={<Error />} />
@@ -21,4 +21,4 @@ const Routeur = () => {
   );
 };
 
-export default Routeur;
+export default App;
