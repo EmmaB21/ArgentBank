@@ -212,6 +212,12 @@ body {
   font-size: 1.2rem;
 }
 
+.error-msg {
+  padding-top: 0.4rem;
+  color: red;
+  font-size: 0.7rem;
+}
+
 .footer {
   display: flex;
   justify-content: center;
