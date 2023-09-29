@@ -1,15 +1,22 @@
 import "../style/main.css"
 import Account from "../components/Account"
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../redux/store";
+import EditButton from "../components/EditButton"
 
 function User() {
 
-    const [userData, setUserData] = useState(null);
-    const token = JSON.parse(localStorage.getItem("token"));
+    // const [userData, setUserData] = useState(null);
+    // const token = JSON.parse(localStorage.getItem("token"));
+    const token = useSelector(state => state.signIn.token)
+    console.log(token)
+    const dispatch = useDispatch()
+    const userProfile = useSelector((state) => state.userProfile)
+    console.log(userProfile)
 
     useEffect(() => {
         const getUserProfile = async () => {
-
             try {
                 const response = await fetch("http://localhost:3001/api/v1/user/profile", {
                     method: "POST",
@@ -18,26 +25,26 @@ function User() {
                         "Authorization": `Bearer ${token}`
                     }
                 })
-                if (response.ok) {
-                    const userData = await response.json();
-                    setUserData(`${userData.body.firstName} ${userData.body.lastName}`);
-                } else {
-                    console.error("Erreur lors de la récupération du profil de l'utilisateur.");
-                }
+                const data = await response.json();
+                const userData = data.body;
+                dispatch(getUserData(userData))
+                console.log(userData)
+                // setUserData(`${userData.firstName} ${userData.lastName}`);
+
             } catch (error) {
                 console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
             }
-
         }
         getUserProfile();
-    }, [token]
-    );
+    }, [token, dispatch]);
+
 
     return (
         <div className='main account-bg-dark'>
             <div className="header">
-                <h1>Welcome back<br />{userData}!</h1>
-                <button className="edit-button">Edit Name</button>
+                <h1>Welcome back<br />{userProfile.firstName} {userProfile.lastName}!</h1>
+                <EditButton />
+                {/* <button className="edit-button">Edit Name</button> */}
             </div>
             <h2 className="sr-only">Accounts</h2>
             <Account

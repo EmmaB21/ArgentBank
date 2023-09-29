@@ -30,7 +30,7 @@ function Form() {
                 const data = await response.json();
                 const token = data.body.token;
                 dispatch(signIn(token));
-                // localStorage.setItem("token", JSON.stringify(token));
+                // localStorage.setItem("token", JSON.stringify({token}));
                 navigate("/user");
             }
             else {

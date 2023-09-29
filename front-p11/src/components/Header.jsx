@@ -6,7 +6,11 @@ import { useSelector } from 'react-redux'
 
 
 function Header() {
-    const token = useSelector(state => state.signIn.token)
+    const userProfile = useSelector((state) => state.userProfile)
+    const token = useSelector((state) => state.signIn.token);
+    // const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token)
+
     return (
         <nav className='main-nav'>
             <NavLink to="/" className='main-nav-logo'>
@@ -22,7 +26,7 @@ function Header() {
                     <>
                         <NavLink to="/user" className="main-nav-item">
                             <i className="fa fa-user-circle"></i>
-                            Toto
+                            {userProfile.userName ? userProfile.userName : userProfile.firstName}
                         </NavLink>
                         <NavLink to="/" onClick={signOut()} className="main-nav-item">
                             <i className="fa fa-sign-out"></i>

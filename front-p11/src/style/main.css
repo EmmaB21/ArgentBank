@@ -22,7 +22,7 @@ body {
 .account-bg-dark {
   background-color: #12002b;
   padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+  padding-bottom: 9rem;
 }
 
 .sr-only {
@@ -188,6 +188,10 @@ body {
   font-size: 16px;
 }
 
+.fa-sign-out {
+  margin-right : 0.2rem
+}
+
 .input-remember {
   display: flex;
 }
@@ -273,12 +277,45 @@ body {
   color: #fff;
   font-weight: bold;
   padding: 10px;
+  margin: 0.2rem;
+  min-width: 68px;
+}
+
+.modal {
+	position: relative;
+	top: 5%;
+	left: 0;
+  right: 0;
+  margin: auto;
+	width: 20%;
+	height: auto;
+	background-color: white;
+  color: black;
+	box-sizing: border-box;
+	display: flex;
+  flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.modalHide {
+	display: none;
+}
+
+
+.modal-title button {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  height:1rem;
+  font-size: 10px;
 }
 
 .header {
   color: #fff;
   margin-bottom: 2rem;
 }
+
 
 .transaction-button {
   display: block;

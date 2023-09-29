@@ -3,7 +3,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const signInSlice = createSlice({
   name: "signIn",
-  initialState: {token : ""},
+  initialState: { token: "" },
   reducers: {
     signIn: (state, action) => {
       state.token = action.payload
@@ -11,38 +11,50 @@ const signInSlice = createSlice({
       // recupère + stocke le token
     },
     signOut: (state) => {
-      state.token = null
+      state.token = ""
+      // localStorage.removeItem("token")
       // supprime le token
     }
   }
 })
 
 
-const userDataSlice = createSlice({
-  name: "UserData",
-  initialState: (() => null),
+const userProfileSlice = createSlice({
+  name: "userProfile",
+  initialState: {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    userName: "",
+  },
   reducers: {
-    GetUserData: () => {
+    getUserData: (state, action) => {
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.userName = action.payload.userName === null ? "" : action.payload.userName;
       // Récupère les données
-      // type : UserData/GetUserData, payload : userdata
+      // type : userProfile/getUserData, payload : userData
     },
- 
-    EditUserData: () => {
+    editUserData: (state, action) => {
+      state.userName = action.payload
       // Modifie les données
-      // type : UserData/EditUserData, payload : userdata
+      // type : userProfile/editUserData, payload : userData
     },
-  }
+  },
 })
 
 const store = configureStore({
   reducer: {
     signIn: signInSlice.reducer,
-    UserData: userDataSlice.reducer,
+    userProfile: userProfileSlice.reducer,
   },
 });
 
-export const {signIn, signOut} = signInSlice.actions;
-export const {GetUserData, EditUserData} = userDataSlice.actions;
+export const { signIn, signOut } = signInSlice.actions;
+export const { getUserData, editUserData } = userProfileSlice.actions;
 
 export default store;
 
