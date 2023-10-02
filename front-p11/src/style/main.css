@@ -283,7 +283,7 @@ body {
 
 .modal {
 	position: relative;
-	top: 5%;
+	top: -50px;
 	left: 0;
   right: 0;
   margin: auto;
@@ -298,10 +298,14 @@ body {
 	justify-content: center;
 }
 
+@media (max-width : 1024px) {
+  .modal {
+    width: auto;}
+}
+
 .modalHide {
 	display: none;
 }
-
 
 .modal-title button {
   position: absolute;
@@ -309,6 +313,9 @@ body {
   right: 5%;
   height:1rem;
   font-size: 10px;
+  background-color: #00bc77;
+  border-color: #00bc77;
+  color: #fff;
 }
 
 .header {
@@ -330,6 +337,7 @@ body {
 }
 
 @media (min-width: 720px) {
+
   .account {
     flex-direction: row;
   }

@@ -1,6 +1,6 @@
 import '../style/main.css'
 
-function Feature({icon, altIcon, title, text}) {
+function Feature({ icon, altIcon, title, text }) {
     return (
         <div className='feature-item'>
             <img src={icon} alt={altIcon} className='feature-icon' />

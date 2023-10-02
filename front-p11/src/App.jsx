@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Layout from './components/Layout';
 import Home from './pages/Home'
 import User from './pages/User'
@@ -7,7 +8,7 @@ import Signin from './pages/Signin'
 import Error from './pages/Error'
 
 const App = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = useSelector(state => state.signIn.token)
   return (
     <Router>
       <Layout>

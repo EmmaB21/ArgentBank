@@ -1,8 +1,8 @@
-import '../style/main.css'
 import Feature from '../components/Feature'
 import ChatIcon from "../assets/icon-chat.png"
 import MoneyIcon from "../assets/icon-money.png"
 import ShieldIcon from "../assets/icon-security.png"
+import '../style/main.css'
 
 function Home() {
     return (
@@ -19,22 +19,22 @@ function Home() {
             <section className='features'>
                 <h2 className='sr-only'>Features</h2>
                 <Feature
-                    icon= {ChatIcon}
+                    icon={ChatIcon}
                     altIcon="Chat Icon"
-                    title= "You are our #1 priority"
-                    text= "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
+                    title="You are our #1 priority"
+                    text="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
                 />
                 <Feature
-                    icon= {MoneyIcon}
+                    icon={MoneyIcon}
                     altIcon="Money Icon"
-                    title= "More savings means higher rates"
-                    text= "The more you save with us, the higher your interest rate will be!"
+                    title="More savings means higher rates"
+                    text="The more you save with us, the higher your interest rate will be!"
                 />
                 <Feature
-                    icon= {ShieldIcon}
+                    icon={ShieldIcon}
                     altIcon="Shield Icon"
-                    title= "Security you can trust"
-                    text= "We use top of the line encryption to make sure your data and money is always safe."
+                    title="Security you can trust"
+                    text="We use top of the line encryption to make sure your data and money is always safe."
                 />
             </section>
         </div>

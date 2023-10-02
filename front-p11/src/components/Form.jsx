@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import '../style/main.css'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../redux/store';
+import '../style/main.css'
 
 function Form() {
     const [email, setEmail] = useState('');
@@ -30,7 +30,6 @@ function Form() {
                 const data = await response.json();
                 const token = data.body.token;
                 dispatch(signIn(token));
-                // localStorage.setItem("token", JSON.stringify({token}));
                 navigate("/user");
             }
             else {

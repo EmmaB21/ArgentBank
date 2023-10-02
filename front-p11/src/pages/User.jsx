@@ -1,14 +1,12 @@
-import "../style/main.css"
-import Account from "../components/Account"
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../redux/store";
+import Account from "../components/Account"
 import EditButton from "../components/EditButton"
+import "../style/main.css"
 
 function User() {
 
-    // const [userData, setUserData] = useState(null);
-    // const token = JSON.parse(localStorage.getItem("token"));
     const token = useSelector(state => state.signIn.token)
     console.log(token)
     const dispatch = useDispatch()
@@ -26,10 +24,10 @@ function User() {
                     }
                 })
                 const data = await response.json();
+                console.log(data)
                 const userData = data.body;
                 dispatch(getUserData(userData))
                 console.log(userData)
-                // setUserData(`${userData.firstName} ${userData.lastName}`);
 
             } catch (error) {
                 console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
@@ -44,7 +42,6 @@ function User() {
             <div className="header">
                 <h1>Welcome back<br />{userProfile.firstName} {userProfile.lastName}!</h1>
                 <EditButton />
-                {/* <button className="edit-button">Edit Name</button> */}
             </div>
             <h2 className="sr-only">Accounts</h2>
             <Account
