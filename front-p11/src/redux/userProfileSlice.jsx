@@ -15,7 +15,7 @@ const userProfileSlice = createSlice({
         state.password = action.payload.password;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
-        state.userName = action.payload.userName === null ? "" : action.payload.userName;
+        state.userName = action.payload.userName;
         // Récupère les données
         // type : userProfile/getUserData, payload : userData
       },

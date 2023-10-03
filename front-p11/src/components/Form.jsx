@@ -18,7 +18,7 @@ function Form() {
             const response = await fetch("http://localhost:3001/api/v1/user/login", {
                 method: "POST",
                 headers: {
-                    "Accept": "application/json",
+                    // "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({

@@ -7,7 +7,9 @@ function EditButton() {
     const [modal, setModal] = useState(false);
     const token = useSelector(state => state.signIn.token)
     const userProfile = useSelector((state) => state.userProfile);
+    console.log(userProfile.userName)
     const [newUserName, setNewUserName] = useState(userProfile.userName);
+    console.log(newUserName)
     const dispatch = useDispatch();
 
 
@@ -21,7 +23,7 @@ function EditButton() {
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
                 method: "PUT",
                 headers: {
-                    "Accept": "*/*",
+                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
@@ -42,8 +44,6 @@ function EditButton() {
         }
     }
 
-
-
     return (
         <>
             <button className="edit-button" onClick={displayModal}>Edit Name</button>
@@ -58,6 +58,7 @@ function EditButton() {
                         <input
                             type="text"
                             id="userName"
+                            autoComplete="username"
                             value={newUserName}
                             onChange={(e) => setNewUserName(e.target.value)}
                         />
