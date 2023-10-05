@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../redux/store';
+import callAPI from '../service/API';
 import '../style/main.css'
+
 
 function Form() {
     const [email, setEmail] = useState('');
@@ -15,26 +17,18 @@ function Form() {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3001/api/v1/user/login", {
-                method: "POST",
-                headers: {
-                    // "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                })
-            })
-            if (response.ok) {
-                const data = await response.json();
-                const token = data.body.token;
-                dispatch(signIn(token));
-                navigate("/user");
-            }
-            else {
-                const errorData = await response.json();
-                setErrorMessage(errorData.message);
+            const response = await callAPI("getToken", null, { email: email, password: password })
+
+            // if (response.ok) {
+            // const data = await response.json();
+            const token = response.body.token;
+            dispatch(signIn(token));
+            navigate("/user");
+            console.log(response)
+            // }
+            if (!response.ok) {
+                // const errorData = await response.json();
+                setErrorMessage(response.message);
             }
 
         } catch (error) {

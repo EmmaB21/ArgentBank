@@ -3,31 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../redux/store";
 import Account from "../components/Account"
 import EditButton from "../components/EditButton"
+import callAPI from "../service/API";
 import "../style/main.css"
 
 function User() {
 
     const token = useSelector(state => state.signIn.token)
-    console.log(token)
     const dispatch = useDispatch()
     const userProfile = useSelector((state) => state.userProfile)
-    console.log(userProfile)
 
     useEffect(() => {
         const getUserProfile = async () => {
             try {
-                const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "*/*",
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-                const data = await response.json();
-                console.log(data)
-                const userData = data.body;
+                const response = await callAPI("getProfile", token, {})
+                const userData = response.body;
                 dispatch(getUserData(userData))
-                console.log(userData)
 
             } catch (error) {
                 console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);

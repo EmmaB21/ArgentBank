@@ -1,58 +1,54 @@
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { signIn } from '../redux/store';
 
-// // Crée une action asynchrone pour la connexion de l'utilisateur
-// export const getToken = createAsyncThunk('user/login', async (loginInfo, { dispatch, rejectWithValue }) => {
-//     try {
-//         const response = await fetch("http://localhost:3001/api/v1/user/login", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify(loginInfo)
-//         });
+const baseURL = "http://localhost:3001/api/v1";
 
-//         const data = await response.json();
-//         const token = data.body.token;
+// Les infos nécessaires pour chaque requête: url, méthode,authentification
+const fetchInfo = {
+    getToken: {
+        url: "/user/login",
+        method: "post",
+        auth: false,
+    },
+    getProfile: {
+        url: "/user/profile",
+        method: "post",
+        auth: true,
+    },
+    putUserName: {
+        url: "/user/profile",
+        method: "put",
+        auth: true,
+    },
+};
 
-//         // Dispatch de l'action signIn avec le token
-//         dispatch(signIn(token));
+export const callAPI = async (infos, token, data = {}) => {
+    const callAPIData = fetchInfo[infos];
 
-//         if (!response.ok) {
-//             const errorData = await response.json();
-//             return rejectWithValue(errorData.message);
-//         }
+    if (!callAPIData) {
+        console.error("Erreur à l'appel de connexion à l'API");
+        return;
+    }
 
-//     } catch (error) {
-//         console.error("Erreur lors de la connexion à l'API :", error);
-//         return rejectWithValue("Une erreur s'est produite lors de la connexion.");
-//     }
-// });
+    const headers = { "Content-Type": "application/json", };
 
-// // Crée une action asynchrone pour récupérer les données de l'utilisateur
-// export const getUserProfile = createAsyncThunk('user/getUserProfile', async (token, thunkAPI) => {
-//     try {
-//         const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-//             method: "POST",
-//             headers: {
-//                 "Accept": "*/*",
-//                 "Authorization": `Bearer ${token}`
-//             }
-//         })
+    if (callAPIData.auth) { headers.Authorization = `Bearer ${token}`; }
 
-//         if (response.ok) {
-//             const data = await response.json();
-//             const userData = data.body;
-//             return userData;
-//         } else {
-//             const errorData = await response.json();
-//             return thunkAPI.rejectWithValue(errorData);
-//         }
+    try {
+        const response = await fetch(
+            `${baseURL}${callAPIData.url}`,
+            {
+                method: callAPIData.method,
+                headers,
+                body: JSON.stringify(data)
+            },
+        )
 
-//     } catch (error) {
-//         console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
-//         return thunkAPI.rejectWithValue({ message: "Une erreur s'est produite lors de la récupération du profil de l'utilisateur." });
-//     }
-// });
+        return response.json();
 
+    } catch (error) {
+        console.error("Erreur lors de la connexion à l'API :", error);
+        throw error;
+    }
+};
+
+export default callAPI;
 

@@ -8,7 +8,7 @@ function Header() {
     const userProfile = useSelector((state) => state.userProfile)
     const dispatch = useDispatch()
     const token = useSelector((state) => state.signIn.token);
-    console.log(token)
+
     const handleSignOut = () => {
         dispatch(signOut())
     }

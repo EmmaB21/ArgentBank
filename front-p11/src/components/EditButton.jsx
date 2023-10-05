@@ -1,44 +1,28 @@
 import { useState, } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserData } from "../redux/store";
+import callAPI from "../service/API";
 import '../style/main.css'
 
 function EditButton() {
     const [modal, setModal] = useState(false);
     const token = useSelector(state => state.signIn.token)
     const userProfile = useSelector((state) => state.userProfile);
-    console.log(userProfile.userName)
     const [newUserName, setNewUserName] = useState(userProfile.userName);
-    console.log(newUserName)
     const dispatch = useDispatch();
-
 
     const displayModal = () => {
         setModal(!modal);
     }
 
     const editUserName = async () => {
-        console.log(newUserName)
+
         try {
-            const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    userName: newUserName,
-                })
-            })
-            if (response.ok) {
-                const data = await response.json();
-                console.log (data)
-                // const userData = data.body;
-                dispatch(editUserData(newUserName))
-                // console.log(userData)
-            } else {
-                console.error("Erreur lors de la récupération du profil de l'utilisateur.");
-            }
+            const response = await callAPI("putUserName", token, { userName: newUserName })
+
+            console.log(response)
+            dispatch(editUserData(newUserName))
+
         } catch (error) {
             console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
         }
