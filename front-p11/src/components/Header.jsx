@@ -9,6 +9,7 @@ function Header() {
     const dispatch = useDispatch()
     const token = useSelector((state) => state.signIn.token);
 
+    //Fonction pour gérer la déconnexion de l'utilisateur
     const handleSignOut = () => {
         dispatch(signOut())
     }
@@ -24,10 +25,13 @@ function Header() {
             </NavLink>
             <div>
                 {
+                    //gestion de l'affichage selon si l'utilisateur est connecté ou non
                     token ?
                         <>
                             <NavLink to="/user" className="main-nav-item">
                                 <i className="fa fa-user-circle"></i>
+                                {/* affichage du profil récupéré dans le state. 
+                                Si pas de userName renseigné, on utilise le firstName */}
                                 {userProfile.userName ? userProfile.userName : userProfile.firstName}
                             </NavLink>
                             <NavLink to="/" onClick={handleSignOut} className="main-nav-item">

@@ -20,9 +20,10 @@ const fetchInfo = {
     },
 };
 
+//construction d'une requête-type qui prend en paramètres les infos (url, méthode, auth), le token si nécessaire, et les données à ajouter au body
 export const callAPI = async (infos, token, data = {}) => {
+    
     const callAPIData = fetchInfo[infos];
-
     if (!callAPIData) {
         console.error("Erreur à l'appel de connexion à l'API");
         return;
@@ -41,8 +42,12 @@ export const callAPI = async (infos, token, data = {}) => {
                 body: JSON.stringify(data)
             },
         )
-
-        return response.json();
+        if (!response.ok) {
+            console.log(response)
+            const errorData = await response.json();
+            throw new Error (errorData.message);
+        }
+        return await response.json();
 
     } catch (error) {
         console.error("Erreur lors de la connexion à l'API :", error);

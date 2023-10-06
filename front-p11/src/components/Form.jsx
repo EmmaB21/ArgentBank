@@ -13,27 +13,21 @@ function Form() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // Fonction pour gérer la connexion utilisateur
     const handleSignIn = async (e) => {
         e.preventDefault();
 
         try {
+            //requête pour récupérer le token quand l'utilisateur se connecte
             const response = await callAPI("getToken", null, { email: email, password: password })
-
-            // if (response.ok) {
-            // const data = await response.json();
             const token = response.body.token;
+            //Appel de l'action signIn qui stocke le token dans le state
             dispatch(signIn(token));
             navigate("/user");
-            console.log(response)
-            // }
-            if (!response.ok) {
-                // const errorData = await response.json();
-                setErrorMessage(response.message);
-            }
 
         } catch (error) {
             console.error("Erreur lors de la connexion à l'API :", error);
-            setErrorMessage("Une erreur s'est produite lors de la connexion.");
+            setErrorMessage(error.message);
         }
     };
 

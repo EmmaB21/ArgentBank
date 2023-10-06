@@ -11,17 +11,20 @@ function EditButton() {
     const [newUserName, setNewUserName] = useState(userProfile.userName);
     const dispatch = useDispatch();
 
+    // Fonction d'affichage de la modale au clic sur le bouton Edit
     const displayModal = () => {
         setModal(!modal);
     }
 
+    // Fonction de modification du nom d'utilisateur
     const editUserName = async () => {
 
         try {
+            // requête pour envoyer le nouveau nom d'utilisateur
             const response = await callAPI("putUserName", token, { userName: newUserName })
-
-            console.log(response)
+            // Appel de l'action pour stocker le nouveau userName
             dispatch(editUserData(newUserName))
+            return response
 
         } catch (error) {
             console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
@@ -42,7 +45,6 @@ function EditButton() {
                         <input
                             type="text"
                             id="userName"
-                            autoComplete="username"
                             value={newUserName}
                             onChange={(e) => setNewUserName(e.target.value)}
                         />

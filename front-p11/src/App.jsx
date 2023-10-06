@@ -7,6 +7,7 @@ import User from './pages/User'
 import Signin from './pages/Signin'
 import Error from './pages/Error'
 
+//Le router englobe le layout comportant le header et le footer ainsi que les routes vers chaque page
 const App = () => {
   const token = useSelector(state => state.signIn.token)
   return (

@@ -12,11 +12,14 @@ function User() {
     const dispatch = useDispatch()
     const userProfile = useSelector((state) => state.userProfile)
 
+    
     useEffect(() => {
         const getUserProfile = async () => {
             try {
+                //requête pour récupérer le profil de l'utilisateur
                 const response = await callAPI("getProfile", token, {})
                 const userData = response.body;
+                //appel de l'action getUserData qui stocke le profil utilisateur dans le state
                 dispatch(getUserData(userData))
 
             } catch (error) {

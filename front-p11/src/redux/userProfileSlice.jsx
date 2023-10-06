@@ -21,7 +21,7 @@ const userProfileSlice = createSlice({
     },
     editUserData: (state, action) => {
       state.userName = action.payload
-      // Modifie les données
+      // Modifie le userName
       // type : userProfile/editUserData, payload : newUserName
     },
   },
