@@ -1,4 +1,4 @@
-import { useState, } from "react";
+import { useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserData } from "../redux/store";
 import callAPI from "../service/API";
@@ -30,6 +30,11 @@ function EditButton() {
             console.error("Erreur lors de la récupération du profil de l'utilisateur :", error);
         }
     }
+
+        // Utilisation de useEffect pour mettre à jour newUserName lorsque userProfile.userName change
+        useEffect(() => {
+            setNewUserName(userProfile.userName);
+        }, [userProfile.userName]);
 
     return (
         <>
