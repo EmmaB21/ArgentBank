@@ -350,3 +350,22 @@ body {
     width: 200px;
   }
 }
+
+.page__ctn-error {
+  background-color: #12002b;
+  height: 500px;
+}
+
+.error__title {
+  font-size: 5rem;
+  color: #fff;
+  padding-top: 5rem;
+}
+
+.error__txt {
+  color: #fff;
+}
+
+.error__link {
+  color: #00bc77;
+}
